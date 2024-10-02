@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast"
 const initialState = {
   pastes: localStorage.getItem("pastes")
     ? JSON.parse(localStorage.getItem("pastes"))
-    : []
+    : [0]
 }
 
 export const pasteSlice = createSlice({
@@ -18,18 +18,42 @@ export const pasteSlice = createSlice({
       toast.success("paste added successfully");
     },
 
-    updateToPastes: (state, action) => {
-      
+    updatePastes: (state, action) => {
+      const paste = action.payload
+      const index = state.pastes.findIndex((item) => item._id === paste._id)
+
+      if (index >= 0) {
+        // If the course is found in the Pastes, update it
+        state.pastes[index] = paste
+        // Update to localstorage
+        localStorage.setItem("pastes", JSON.stringify(state.pastes))
+        // show toast
+        toast.success("Paste updated")
+      }
     },
     removeFromPastes: (state, action) => {
-     
+      const pasteId = action.payload
+
+      console.log(pasteId)
+      const index = state.pastes.findIndex((item) => item._id === pasteId)
+
+      if (index >= 0) {
+         // If the course is found in the Pastes, remove it
+        state.pastes.splice(index, 1)
+        // Update to localstorage
+        localStorage.setItem("pastes", JSON.stringify(state.pastes))
+        // show toast
+        toast.success("Paste deleted")
+      }
     },
-    resetAllPaste: (state) => {
-     
+    resetPaste: (state) => {
+      state.pastes = []
+      // Update to localstorage
+      localStorage.removeItem("pastes")
     },
   },
 })
 
-export const { addToPastes, removeFromPastes, updateToPastes ,resetAllPaste } = pasteSlice.actions
+export const { addToPastes, removeFromPastes, updatePastes ,resetPaste } = pasteSlice.actions
 
 export default pasteSlice.reducer

@@ -3,7 +3,7 @@ import "./App.css"
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import Paste from "./components/Paste";
-import ViewPaste from "./components/viewPaste";
+import ViewPaste from "./components/ViewPaste";
 import { RouterProvider } from "react-router-dom";
 
 
@@ -35,7 +35,7 @@ const router = createBrowserRouter(
   element: 
     <div>
        <Navbar/>
-       <ViewPaste/>
+       <ViewPaste />
     </div> 
   },
 

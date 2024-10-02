@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { addToPastes, updateToPastes } from '../Redux/pasteSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToPastes, updatePastes } from '../Redux/pasteSlice';
+
 
 const Home = () => {
   const [title, setTitle] = useState('');
   const [value, setValue] = useState('');
   const [searchParams] = useSearchParams();
   const pasteId = searchParams.get('pasteId');
-  const usedispatch = useDispatch();
+  const usedispatch = useDispatch();  
+  const allPaste = useSelector ((state)=>state.paste.pastes);
+
+  useEffect(()=>{
+    if(pasteId){
+      const paste = allPaste.find((p)=>p._id ===pasteId );
+      setTitle(paste.title);
+      setValue(paste.content);
+
+    }
+},[pasteId])
 
     function createPaste() {
       const paste ={
@@ -18,9 +29,10 @@ const Home = () => {
         createdAt:new Date().toISOString(),
       }
 
+
       if (pasteId) 
         {
-          usedispatch(updateToPastes(paste));
+          usedispatch(updatePastes(paste));
       } 
       else {
         usedispatch(addToPastes(paste));
@@ -28,11 +40,13 @@ const Home = () => {
 
         setTitle("");
         setValue("");
-        searchParams({});
+        searchParams("");
 
 
 
     }
+         
+
 
 
 
