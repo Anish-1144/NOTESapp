@@ -4,22 +4,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToPastes, updatePastes } from '../Redux/pasteSlice';
 
 
-const ViewPaste = () => {
-  const [title, setTitle] = useState('');
-  const [value, setValue] = useState('');
-  const [searchParams] = useSearchParams();
-  const pasteId = searchParams.get('pasteId');
-  const usedispatch = useDispatch();  
+ const ViewPaste = () => {
+//   const [title, setTitle] = useState('');
+//   const [value, setValue] = useState('');
+//   const [searchParams] = useSearchParams();
+//   const pasteId = searchParams.get('pasteId');
+//   const usedispatch = useDispatch();  
   
 
-  useEffect(()=>{
-    if(pasteId){
-      const paste = allPaste.find((p)=>p._id ===pasteId );
-      setTitle(paste.title);
-      setValue(paste.content);
+//   useEffect(()=>{
+//     if(pasteId){
+//       const paste = allPaste.find((p)=>p._id ===pasteId );
+//       setTitle(paste.title);
+//       setValue(paste.content);
 
-    }
-},[pasteId])
+//     }
+// },[pasteId])
 
     // function createPaste() {
     //   const paste ={
