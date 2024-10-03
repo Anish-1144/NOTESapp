@@ -17,23 +17,28 @@ const Paste = () => {
   }
 
   return (
-    <div>
-      <input
-        className='bg-black text-white rounded-2xl p-2 mt-5 min-w-96'
+    <div className="w-full h-full py-10 max-w-[1200px] mx-auto px-5 lg:px-0"> 
+     <input
+        className='bg-black text-white rounded-2xl p-2 mt-5 w-96'
         type="search"
         placeholder='search here'
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
+      <div className='flex flex-col gap-y-3'>
+     
 
       <div className='flex flex-col gap-5 mt-5'>
         {filterData.length > 0 && filterData.map(
           (paste) => {
             return (
-              <div className='border bg-cyan-400 p-4 rounded-lg' key={paste?._id}>
-                <div className="text-xl font-bold mb-2">{paste.title}</div>
-                <div>{paste.content}</div>
-                <div className="flex gap-4 mt-3">
+              <div className='border bg-black p-4 rounded-lg' key={paste?._id}>
+                <div className="border border-[rgba(128,121,121,0.3)] w-full gap-y-6 justify-between flex flex-col sm:flex-row p-4 rounded-[0.3rem] text-3xl font-bold text-white"
+                >{paste.title}</div>
+               <div className='text-gray-100 font-light justify-start'>
+                 {paste.content.split(" ").slice(0, 2).join(" ")}.......
+                  </div>
+                <div className="flex gap-4 mt-3 justify-end">
                   <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
                     <a href={`/?pasteId=${paste?._id}`}>edit</a>
                   </button>
@@ -63,6 +68,7 @@ const Paste = () => {
         )}
       </div>
     </div>
+      </div>
   )
 }
 
